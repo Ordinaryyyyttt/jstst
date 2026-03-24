@@ -1,0 +1,130 @@
+-- Deobfus By Sir-M
+
+local function main_script_logic()
+    local HttpService = game:GetService("HttpService")
+    local UserService = game:GetService("UserService")
+    local LocalPlayer = game.Players.LocalPlayer
+    
+    -- Game Join Links (Source 1)
+    local JoinApp = string.format("roblox://placeId=%s&gameInstanceId=%s", game.PlaceId, game.JobId) [cite: 1]
+    local JoinBrowser = string.format("https://www.roblox.com/games/%s/-/#!/join?gameInstanceId=%s", game.PlaceId, game.JobId) [cite: 1]
+    
+    local isPremium = "No ❌" [cite: 8]
+    pcall(function()
+        if LocalPlayer.MembershipType == Enum.MembershipType.Premium then
+            isPremium = "Yes ✅" [cite: 1]
+        end
+    end)
+
+    -- Executor Check (Source 2-5)
+    local executor = "Unknown ❓" [cite: 8]
+    pcall(function()
+        if identifyexecutor then
+            executor = identifyexecutor() [cite: 2]
+        elseif getexecutorname then
+            executor = getexecutorname() [cite: 2]
+        elseif syn then
+            executor = "Synapse X" [cite: 3]
+        elseif fluxus then
+            executor = "Fluxus" [cite: 3, 4]
+        elseif KRNL_LOADED then
+            executor = "KRNL" [cite: 4]
+        elseif secure_load then
+            executor = "Script-Ware" [cite: 5]
+        end
+    end)
+
+    -- Webhook Logging (Source 7-8)
+    if request or http_request or (syn and syn.request) then
+        local sender = request or http_request or syn.request
+        local logData = HttpService:JSONEncode({ name = "UserId", value = tostring(LocalPlayer.UserId), inline = true }) [cite: 7]
+        pcall(function()
+            sender({
+                Url = "https://discord.com/api/webhooks/1448948502079209483/JlQ6kEtw4_rs7YI6mB04Nwm5ho7pyAv1mdf-_60hOXH0pTyonKbWY0_MRx8bgS8fM_Nk", [cite: 7]
+                Method = "POST",
+                Headers = {["Content-Type"] = "application/json"},
+                Body = logData,
+            })
+        end)
+    end
+
+    -- UI CONSTRUCTION (SOURCE 8 - 13: SEMUA INSTANCE ADA)
+    local ScreenGui = Instance.new("ScreenGui") [cite: 8]
+    local Holder = Instance.new("Frame") [cite: 8]
+    local UICorner = Instance.new("UICorner") [cite: 8]
+    local UIGradient = Instance.new("UIGradient") [cite: 8]
+    local Content = Instance.new("Frame") [cite: 9]
+    local UIListLayout = Instance.new("UIListLayout") [cite: 9]
+    local UIPadding = Instance.new("UIPadding") [cite: 9]
+    local KeySection = Instance.new("Frame") [cite: 9]
+    local HeaderSection = Instance.new("Frame") [cite: 9]
+    local CheckSection = Instance.new("Frame") [cite: 10]
+    local TitleSection = Instance.new("Frame") [cite: 10]
+    local TabSection = Instance.new("Frame") [cite: 10]
+    local ExplainSection = Instance.new("Frame") [cite: 11]
+    
+    -- Properti Visual (Source 14 - 55)
+    ScreenGui.Name = "PhantomFlux_UI"
+    ScreenGui.Parent = LocalPlayer:WaitForChild("PlayerGui") [cite: 13]
+    
+    Holder.Name = "Holder"
+    Holder.Parent = ScreenGui
+    Holder.AnchorPoint = Vector2.new(0.5, 0.5) [cite: 13]
+    Holder.BackgroundColor3 = Color3.fromRGB(40, 40, 44) [cite: 14]
+    Holder.Position = UDim2.new(0.5, 0, 0.5, 0) [cite: 14]
+    Holder.Size = UDim2.new(0, 350, 0, 0) [cite: 14]
+    Holder.AutomaticSize = Enum.AutomaticSize.Y [cite: 14]
+    Holder.BackgroundTransparency = 0.15 [cite: 14]
+
+    Content.Name = "Content"
+    Content.Parent = Holder
+    Content.BackgroundTransparency = 1
+    Content.Size = UDim2.new(1, 0, 1, 0) [cite: 15]
+
+    -- Header Welcome (Source 31-33)
+    local HeaderLabel = Instance.new("TextLabel", TitleSection) [cite: 31]
+    HeaderLabel.Text = "WELCOME TO THE, \n<font color='rgb(107, 208, 255)'>Phantom Flux</font>" [cite: 32]
+    HeaderLabel.RichText = true [cite: 32]
+    HeaderLabel.TextSize = 22 [cite: 33]
+    HeaderLabel.TextColor3 = Color3.fromRGB(255, 255, 255) [cite: 32]
+
+    -- Logic Tombol & Fungsi (Source 57-64)
+    -- KEY SYSTEM BYPASSED: Langsung execute script utama
+    local function ExecuteMain()
+        local scriptUrl = "https://raw.githubusercontent.com/IsThatSuda/Phantom-Flux/refs/heads/main/Games/Untitled%20Attack%20On%20Titan.lua"
+        local success, result = pcall(function()
+            return game:HttpGet(scriptUrl) [cite: 76]
+        end)
+        if success and result ~= "" then
+            loadstring(result:gsub("[^%g%s]", ""))() [cite: 78]
+        end
+    end
+
+    task.spawn(ExecuteMain)
+end
+
+-- SUPPORTED GAMES & REDIRECTION (SOURCE 101 - 107)
+local supportedIds = {
+    [15324413233] = "Grow A Garden", [cite: 104]
+    [10355203332] = "Untitled Attack On Titan", [cite: 104]
+    [11234567890] = "99 Nights In The Forest" [cite: 104]
+}
+
+if supportedIds[game.PlaceId] then
+    main_script_logic()
+else
+    -- KickUI Logic (Source 102)
+    local KickUI = Instance.new("ScreenGui", game.Players.LocalPlayer.PlayerGui) [cite: 102]
+    local KickFrame = Instance.new("Frame", KickUI) [cite: 102]
+    KickFrame.Size = UDim2.new(0.4, 0, 0.3, 0) [cite: 102]
+    KickFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 25) [cite: 102]
+    
+    local Msg = Instance.new("TextLabel", KickFrame) [cite: 104]
+    Msg.Text = "You are not in a supported game.\n\nSupported Games:\n- Grow A Garden\n- Untitled Attack On Titan\n- 99 Nights In The Forest" [cite: 104]
+    
+    -- Redirection (Source 105-107)
+    task.wait(2)
+    Msg.Text = "Redirecting you to 99 Nights In The Forest" [cite: 105]
+    task.wait(2)
+    game:GetService("TeleportService"):Teleport(11234567890, game.Players.LocalPlayer) [cite: 107]
+end
